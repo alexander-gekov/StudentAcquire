@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using StudentAcquire.Listing.Service.Data;
+using StudentAcquire.Listing.Service.Data.Repositories.Interfaces;
+using StudentAcquire.Listing.Service.Data.Repositories;
 
 namespace StudentAcquire.Listing.Service
 {
@@ -30,13 +32,15 @@ namespace StudentAcquire.Listing.Service
         {
 
             services.AddControllers();
+            services.AddScoped<IGenericRepository<Models.Listing>, ListingRepository<Models.Listing>>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentAcquire.Listing.Service", Version = "v1" });
             });
 
-            services.AddDbContext<StudentAcquireListingServiceContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("StudentAcquireListingServiceContext")));
+            services.AddDbContext<ListingServiceContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ListingServiceContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

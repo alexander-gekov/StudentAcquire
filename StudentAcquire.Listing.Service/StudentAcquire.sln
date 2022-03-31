@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentAcquire.Listing.Service", "StudentAcquire.Listing.Service.csproj", "{51244A36-4161-4233-A438-6054B004EB09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentAcquire.Chat.Service", "..\StudentAcquire.Chat.Service\StudentAcquire.Chat.Service.csproj", "{A56FA79A-C0EE-47B9-BFFE-0ECD777273A8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{51244A36-4161-4233-A438-6054B004EB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51244A36-4161-4233-A438-6054B004EB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51244A36-4161-4233-A438-6054B004EB09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A56FA79A-C0EE-47B9-BFFE-0ECD777273A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A56FA79A-C0EE-47B9-BFFE-0ECD777273A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A56FA79A-C0EE-47B9-BFFE-0ECD777273A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A56FA79A-C0EE-47B9-BFFE-0ECD777273A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,7 @@ using StudentAcquire.Listing.Service.Data;
 
 namespace StudentAcquire.Listing.Service.Migrations
 {
-    [DbContext(typeof(StudentAcquireListingServiceContext))]
+    [DbContext(typeof(ListingServiceContext))]
     partial class StudentAcquireListingServiceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

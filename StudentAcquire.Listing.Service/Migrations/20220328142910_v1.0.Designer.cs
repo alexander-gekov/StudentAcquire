@@ -9,7 +9,7 @@ using StudentAcquire.Listing.Service.Data;
 
 namespace StudentAcquire.Listing.Service.Migrations
 {
-    [DbContext(typeof(StudentAcquireListingServiceContext))]
+    [DbContext(typeof(ListingServiceContext))]
     [Migration("20220328142910_v1.0")]
     partial class v10
     {

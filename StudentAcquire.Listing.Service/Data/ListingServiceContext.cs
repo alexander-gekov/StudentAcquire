@@ -7,13 +7,13 @@ using StudentAcquire.Listing.Service.Models;
 
 namespace StudentAcquire.Listing.Service.Data
 {
-    public class StudentAcquireListingServiceContext : DbContext
+    public class ListingServiceContext : DbContext
     {
-        public StudentAcquireListingServiceContext (DbContextOptions<StudentAcquireListingServiceContext> options)
+        public ListingServiceContext (DbContextOptions<ListingServiceContext> options)
             : base(options)
         {
         }
 
-        public DbSet<StudentAcquire.Listing.Service.Models.Listing> Listing { get; set; }
+        public DbSet<Models.Listing> Listing { get; set; }
     }
 }

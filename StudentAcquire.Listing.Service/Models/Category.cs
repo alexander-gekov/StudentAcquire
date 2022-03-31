@@ -8,6 +8,8 @@ namespace StudentAcquire.Listing.Service.Models
 {
     public class Category
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string CategoryText { get; set; }
     }

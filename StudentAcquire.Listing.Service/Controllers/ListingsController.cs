@@ -2,107 +2,87 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentAcquire.Listing.Service.Data;
+using StudentAcquire.Listing.Service.Data.Repositories;
+using StudentAcquire.Listing.Service.Data.Repositories.Interfaces;
+using StudentAcquire.Listing.Service.Dtos;
 using StudentAcquire.Listing.Service.Models;
 
 namespace StudentAcquire.Listing.Service.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/listings")]
     [ApiController]
     public class ListingsController : ControllerBase
     {
-        private readonly StudentAcquireListingServiceContext _context;
+        private readonly IGenericRepository<Models.Listing> _repository;
+        private readonly IMapper _mapper;
 
-        public ListingsController(StudentAcquireListingServiceContext context)
+        public ListingsController(IGenericRepository<Models.Listing> repository, IMapper mapper)
         {
-            _context = context;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         // GET: api/Listings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Models.Listing>>> GetListing()
+        public ActionResult<IEnumerable<ListingReadDto>> GetListing()
         {
-            return await _context.Listing.ToListAsync();
+            var listings = _repository.GetAll();
+
+            return Ok(_mapper.Map<IEnumerable<ListingReadDto>>(listings));
         }
 
         // GET: api/Listings/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Models.Listing>> GetListing(int id)
+        [HttpGet("{id}", Name="GetListingById")]
+        public ActionResult<ListingReadDto> GetListing(int id)
         {
-            var listing = await _context.Listing.FindAsync(id);
+            var listing =  _repository.GetById(id);
 
             if (listing == null)
             {
                 return NotFound();
             }
 
-            return listing;
+            return Ok(_mapper.Map<ListingReadDto>(listing));
         }
 
         // PUT: api/Listings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutListing(int id, Models.Listing listing)
+        public ActionResult PutListing(int id, ListingCreateDto listing)
         {
-            if (id != listing.Id)
-            {
-                return BadRequest();
-            }
+            var model = _mapper.Map<Models.Listing>(listing);
+            model.Id = id;
+            _repository.Update(model);
+            var listingReadDto = _mapper.Map<ListingReadDto>(model);
 
-            _context.Entry(listing).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ListingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return CreatedAtAction(nameof(GetListing), new { Id = listingReadDto.Id }, listingReadDto);
         }
 
         // POST: api/Listings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Models.Listing>> PostListing(Models.Listing listing)
+        public ActionResult<ListingReadDto> PostListing(ListingCreateDto listing)
         {
-            _context.Listing.Add(listing);
-            await _context.SaveChangesAsync();
+            var model = _mapper.Map<Models.Listing>(listing);
+            _repository.Add(model);
 
-            return CreatedAtAction("GetListing", new { id = listing.Id }, listing);
+            var listingReadDto = _mapper.Map<ListingReadDto>(model);
+
+            return CreatedAtAction(nameof(GetListing), new { Id = listingReadDto.Id }, listingReadDto);
         }
 
         // DELETE: api/Listings/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteListing(int id)
         {
-            var listing = await _context.Listing.FindAsync(id);
-            if (listing == null)
-            {
-                return NotFound();
-            }
-
-            _context.Listing.Remove(listing);
-            await _context.SaveChangesAsync();
+            await _repository.DeleteAsync(id);
 
             return NoContent();
-        }
-
-        private bool ListingExists(int id)
-        {
-            return _context.Listing.Any(e => e.Id == id);
         }
     }
 }
