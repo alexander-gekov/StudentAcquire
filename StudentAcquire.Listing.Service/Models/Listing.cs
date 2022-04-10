@@ -22,7 +22,8 @@ namespace StudentAcquire.Listing.Service.Models
         public int MessagesSent { get; set; }
         public string Website { get; set; }
         public virtual List<Category> Categories { get; set; } = new List<Category>();
-        public virtual List<Seller> Sellers { get; set; } = new List<Seller>();
+        
+        public Models.Seller Seller { get; set;}
         public bool Sold { get; set; }
     }
 }

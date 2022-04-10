@@ -11,7 +11,7 @@ namespace StudentAcquire.Listing.Service.Profiles
     {
         public ListingsProfile()
         {
-            CreateMap<Models.Listing, ListingReadDto>();
+            CreateMap<Models.Listing, ListingReadDto>().ForMember(d=> d.Seller, o => o.MapFrom(s=> s.Seller));
             CreateMap<ListingCreateDto, Models.Listing>();
         }
     }

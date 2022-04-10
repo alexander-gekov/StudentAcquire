@@ -22,6 +22,6 @@ namespace StudentAcquire.Listing.Service.Dtos
         public string Website { get; set; }
         public virtual List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
         [Required]
-        public virtual List<SellerDto> Sellers { get; set; } = new List<SellerDto>();
+        public SellerDto Seller { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace StudentAcquire.Listing.Service.Dtos
         public int MessagesSent { get; set; }
         public string Website { get; set; }
         public virtual List<Category> Categories { get; set; } = new List<Category>();
-        public virtual List<Seller> Sellers { get; set; } = new List<Seller>();
+        public SellerDto Seller { get; set; }
         public bool Sold { get; set; }
     }
 }

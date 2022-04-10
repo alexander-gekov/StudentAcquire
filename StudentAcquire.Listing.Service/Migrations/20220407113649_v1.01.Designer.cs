@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentAcquire.Listing.Service.Data;
 
 namespace StudentAcquire.Listing.Service.Migrations
 {
     [DbContext(typeof(ListingServiceContext))]
-    partial class StudentAcquireListingServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20220407113649_v1.01")]
+    partial class v101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
