@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_listings:
 
     runs-on: ubuntu-latest
 
@@ -18,8 +18,25 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln test --no-build --verbosity normal
+      
+  build_users:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet StudentAcquire.Users.Service/StudentAcquire.Users.Service.sln restore
+    - name: Build
+      run: dotnet StudentAcquire.Users.Service/StudentAcquire.Users.Service.sln build --no-restore
+    - name: Test
+      run: dotnet StudentAcquire.Users.Service/StudentAcquire.Users.Service.sln test --no-build --verbosity normal
