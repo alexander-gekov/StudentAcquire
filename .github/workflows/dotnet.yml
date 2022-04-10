@@ -18,11 +18,11 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj restore
+      run: dotnet restore ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
     - name: Build
-      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj build --no-restore
+      run: dotnet build --no-restore ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
     - name: Test
-      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln 
       
   build_users:
 
@@ -34,11 +34,9 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 5.0.x
-    - name: Go to Users Service
-      run: cd StudentAcquire.User.Service
     - name: Restore dependencies
-      run: dotnet StudentAcquire.Users.Service.sln restore
+      run: dotnet restore ./StudentAcquire.User.Service/StudentAcquire.User.Service.sln
     - name: Build
-      run: dotnet StudentAcquire.Users.Service.sln build --no-restore
+      run: dotnet build --no-restore ./StudentAcquire.User.Service/StudentAcquire.User.Service.sln
     - name: Test
-      run: dotnet StudentAcquire.Users.Service.sln test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./StudentAcquire.User.Service/StudentAcquire.User.Service.sln
