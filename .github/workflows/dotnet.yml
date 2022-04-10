@@ -17,14 +17,12 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 5.0.x
-    - name: Go to Listing Service
-      run: cd StudentAcquire.Listing.Service
     - name: Restore dependencies
-      run: dotnet StudentAcquire.Listing.Service.sln restore
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj restore
     - name: Build
-      run: dotnet StudentAcquire.Listing.Service.sln build --no-restore
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj build --no-restore
     - name: Test
-      run: dotnet StudentAcquire.Listing.Service.sln test --no-build --verbosity normal
+      run: dotnet StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.csproj test --no-build --verbosity normal
       
   build_users:
 
