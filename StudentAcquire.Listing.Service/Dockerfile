@@ -5,7 +5,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 COPY . ./
-RUN dotnet publish StudentAcquire.sln -c Release -o out
+RUN dotnet publish StudentAcquire.Listing.Service.sln -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0
 WORKDIR /app
