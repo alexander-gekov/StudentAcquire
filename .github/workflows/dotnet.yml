@@ -49,7 +49,23 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"alexander-gekov_StudentAcquire" /o:"alexander-gekov" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --no-restore ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-     
+  
+  build_listings:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
+    - name: Build
+      run: dotnet build --no-restore ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./StudentAcquire.Listing.Service/StudentAcquire.Listing.Service.sln
       
   build_users:
 
