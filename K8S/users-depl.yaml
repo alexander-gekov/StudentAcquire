@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: listings-depl
+  name: users-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: listingservice
+      app: userservice
   template:
     metadata:
       labels:
-        app: listingservice
+        app: userservice
     spec:
       containers:
-        - name: listingservice
-          image: alexandergekov00/listingservice:latest
+        - name: userservice
+          image: alexandergekov00/userservice:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: listings-clusterip-srv
+  name: users-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: listingservice
+    app: userservice
   ports:
-    - name: listingservice
+    - name: userservice
       protocol: TCP
       port: 80
       targetPort: 80

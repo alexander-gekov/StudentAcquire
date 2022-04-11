@@ -40,7 +40,7 @@ namespace StudentAcquire.Listing.Service
             });
 
             services.AddDbContext<ListingServiceContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ListingServiceContext")));
+                    options.UseInMemoryDatabase("ListingService"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
