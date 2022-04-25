@@ -28,4 +28,4 @@ spec:
     - name: userservice
       protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 6000

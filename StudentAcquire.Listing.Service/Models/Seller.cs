@@ -8,6 +8,12 @@ namespace StudentAcquire.Listing.Service.Models
 {
     public class Seller
     {
+        public Seller(string name, string userName)
+        {
+            Name = name;
+            UserName = userName;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

@@ -20,9 +20,12 @@ namespace StudentAcquire.Listing.Service
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -30,7 +33,13 @@ namespace StudentAcquire.Listing.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            if(_env.IsProduction()){
+                services.AddDbContext<ListingServiceContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            } else {
+                services.AddDbContext<ListingServiceContext>(options =>
+                        options.UseInMemoryDatabase("ListingService"));
+            }
             services.AddControllers();
             services.AddScoped<IGenericRepository<Models.Listing>, ListingRepository<Models.Listing>>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -38,9 +47,6 @@ namespace StudentAcquire.Listing.Service
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentAcquire.Listing.Service", Version = "v1" });
             });
-
-            services.AddDbContext<ListingServiceContext>(options =>
-                    options.UseInMemoryDatabase("ListingService"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +69,8 @@ namespace StudentAcquire.Listing.Service
             {
                 endpoints.MapControllers();
             });
+
+            PrepDb.PrepPopulation(app, env.IsProduction());
         }
     }
 }
