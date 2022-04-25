@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using StudentAcquire.Listing.Service.Data;
 using StudentAcquire.Listing.Service.Data.Repositories.Interfaces;
 using StudentAcquire.Listing.Service.Data.Repositories;
+using StudentAcquire.Listing.Service.SyncDataServices.Http;
+using StudentAcquire.Listing.Service.AsyncDataServices;
 
 namespace StudentAcquire.Listing.Service
 {
@@ -42,6 +44,8 @@ namespace StudentAcquire.Listing.Service
             }
             services.AddControllers();
             services.AddScoped<IGenericRepository<Models.Listing>, ListingRepository<Models.Listing>>();
+            services.AddHttpClient<IUserDataClient, HttpUserDataClient>();
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
