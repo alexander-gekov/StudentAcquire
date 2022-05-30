@@ -1,0 +1,18 @@
+version: "1"
+
+services:
+  users-service:
+    build:
+      context: ./StudentAcquire.User.Service
+      dockerfile: Dockerfile
+    ports:
+      - 6001:6001
+      - 6000:6000
+  listings-service:
+    build:
+      context: ./StudentAcquire.Listing.Service
+      dockerfile: Dockerfile
+    ports:
+      - 5001:5001
+      - 5000:5000
+  users-db:

@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: studentacquire.com
+    - host: c5a64610f3e4b4242355416d12d290df.gr7.eu-central-1.eks.amazonaws.com
       http:
         paths:
           - path: /api/listings
