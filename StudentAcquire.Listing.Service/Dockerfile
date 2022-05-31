@@ -3,8 +3,7 @@ WORKDIR /app
 
 EXPOSE 5000
 
-COPY *.csproj ./
-COPY *.sln ./
+COPY StudentAcquire.Listing.Service.csproj ./
 RUN dotnet restore
 
 COPY . ./
