@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: listingservice
-          image: alexandergekov00/listingservice:latest
+          image: 286938589922.dkr.ecr.eu-central-1.amazonaws.com/student-acquire:listings_service
 ---
 apiVersion: v1
 kind: Service

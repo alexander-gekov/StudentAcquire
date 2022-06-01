@@ -67,8 +67,6 @@ namespace StudentAcquire.Listing.Service
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
