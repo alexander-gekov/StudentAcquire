@@ -15,4 +15,27 @@ services:
     ports:
       - 5001:5001
       - 5000:5000
-  users-db:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+  db-listings:
+    image: "postgres"
+    restart: "always"
+    ports:
+      - "5434:5432"
+
+    environment:
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_USER: "nevski00"
+      POSTGRES_DB: "studentacquire-listings"
+  db-users:
+    image: "postgres"
+    restart: "always"
+    ports:
+      - "5434:5432"
+
+    environment:
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_USER: "nevski00"
+      POSTGRES_DB: "studentacquire-users"

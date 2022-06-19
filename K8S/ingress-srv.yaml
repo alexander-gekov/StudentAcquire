@@ -9,16 +9,16 @@ metadata:
 spec:
   rules:
     - host: c5a64610f3e4b4242355416d12d290df.gr7.eu-central-1.eks.amazonaws.com
-      http:
+    - http:
         paths:
-          - path: /api/listings
+          - path: /api/listings/*
             pathType: Prefix
             backend:
               service:
                 name: listings-clusterip-srv
                 port:
                   number: 80
-          - path: /api/u/listings
+          - path: /api/u/listings/*
             pathType: Prefix
             backend:
               service:
